@@ -29,9 +29,7 @@ namespace Fint.Sse.Adapter.Services
             {
                 serverSideEvent.Status = Status.ADAPTER_REJECTED;
             }
-
-            serverSideEvent.Data?.Clear();
-
+            
             PostStatus(serverSideEvent);
 
             return serverSideEvent;
