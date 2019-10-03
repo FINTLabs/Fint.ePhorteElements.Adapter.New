@@ -4,6 +4,6 @@ namespace Fint.Sse.Adapter.Services
 {
     public interface IEventStatusService
     {
-        Event<object> VerifyEvent(Event<object> serverSideEvent);
+        Event<object> VerifyEvent(Event<object> fintEvent);
     }
 }

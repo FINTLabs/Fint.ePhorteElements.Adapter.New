@@ -4,6 +4,6 @@ namespace Fint.Sse.Adapter.Services
 {
     public interface IHttpService
     {
-        void Post(string endpoint, Event<object> serverSideEvent);
+        void Post(string endpoint, Event<object> fintEvent);
     }
 }

@@ -25,28 +25,26 @@ namespace Fint.Sse.Adapter.Services
             _appSettings = appSettings.Value;
         }
 
-        public void HandleEvent(Event<object> serverSideEvent)
+        public void HandleEvent(Event<object> fintEvent)
         {
-            if (serverSideEvent.IsHealthCheck())
+            if (fintEvent.IsHealthCheck())
             {
-                PostHealthCheckResponse(serverSideEvent);
+                PostHealthCheckResponse(fintEvent);
             }
             else
             {
-                if (_statusService.VerifyEvent(serverSideEvent).Status == Status.ADAPTER_ACCEPTED)
+                if (_statusService.VerifyEvent(fintEvent).Status == Status.ADAPTER_ACCEPTED)
                 {
-                    var responseEvent = serverSideEvent;
-
-                    responseEvent.Status = Status.ADAPTER_RESPONSE;
+                    fintEvent.Status = Status.ADAPTER_RESPONSE;
                     _logger.LogInformation("POST EventResponse");
-                    _httpService.Post(_appSettings.ResponseEndpoint, responseEvent);
+                    _httpService.Post(_appSettings.ResponseEndpoint, fintEvent);
                 }
             }
         }
 
-        private void PostHealthCheckResponse(Event<object> serverSideEvent)
+        private void PostHealthCheckResponse(Event<object> fintEvent)
         {
-            var healthCheckEvent = serverSideEvent;
+            var healthCheckEvent = fintEvent;
             healthCheckEvent.Status = Status.TEMP_UPSTREAM_QUEUE;
 
             if (IsHealthy())

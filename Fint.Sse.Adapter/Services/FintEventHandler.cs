@@ -11,9 +11,9 @@ namespace Fint.Sse.Adapter.Services
             _eventHandlerService = eventHandlerService;
         }
 
-        public void HandleEvent(Event<object> serverSideEvent)
+        public void HandleEvent(Event<object> fintEvent)
         {
-            _eventHandlerService.HandleEvent(serverSideEvent);
+            _eventHandlerService.HandleEvent(fintEvent);
         }
     }
 }

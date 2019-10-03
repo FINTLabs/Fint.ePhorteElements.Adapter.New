@@ -18,20 +18,20 @@ namespace Fint.Sse.Adapter.Services
             _logger = logger;
         }
 
-        public Event<object> VerifyEvent(Event<object> serverSideEvent)
+        public Event<object> VerifyEvent(Event<object> fintEvent)
         {
-            if (ActionUtils.IsValidStatusAction(serverSideEvent.Action))
+            if (ActionUtils.IsValidStatusAction(fintEvent.Action))
             {
-                serverSideEvent.Status = Status.ADAPTER_ACCEPTED;
+                fintEvent.Status = Status.ADAPTER_ACCEPTED;
             }
             else
             {
-                serverSideEvent.Status = Status.ADAPTER_REJECTED;
+                fintEvent.Status = Status.ADAPTER_REJECTED;
             }
             
-            PostStatus(serverSideEvent);
+            PostStatus(fintEvent);
 
-            return serverSideEvent;
+            return fintEvent;
         }
 
         private void PostStatus(Event<object> evt)

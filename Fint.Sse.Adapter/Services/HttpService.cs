@@ -21,7 +21,7 @@ namespace Fint.Sse.Adapter.Services
             _tokenService = tokenService;
         }
 
-        public async void Post(string endpoint, Event<object> serverSideEvent)
+        public async void Post(string endpoint, Event<object> fintEvent)
         {
             var accessToken = "";
 
@@ -40,10 +40,10 @@ namespace Fint.Sse.Adapter.Services
                 _httpClient.SetBearerToken(accessToken);
             }
 
-            var json = JsonConvert.SerializeObject(serverSideEvent);
+            var json = JsonConvert.SerializeObject(fintEvent);
             var content = new StringContent(json);
 
-            content.Headers.Add(FintHeaders.ORG_ID_HEADER, serverSideEvent.OrgId);
+            content.Headers.Add(FintHeaders.ORG_ID_HEADER, fintEvent.OrgId);
             content.Headers.ContentType = contentType;
 
             try
@@ -57,7 +57,7 @@ namespace Fint.Sse.Adapter.Services
             catch (Exception e)
             {
                 _logger.LogWarning("Could not POST {event} to {endpoint}. Error: {error}",
-                    serverSideEvent, endpoint, e.Message);
+                    fintEvent, endpoint, e.Message);
             }
         }
     }

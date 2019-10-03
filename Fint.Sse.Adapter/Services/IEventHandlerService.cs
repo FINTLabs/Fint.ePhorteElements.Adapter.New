@@ -4,6 +4,6 @@ namespace Fint.Sse.Adapter.Services
 {
     public interface IEventHandlerService
     {
-        void HandleEvent(Event<object> serverSideEvent);
+        void HandleEvent(Event<object> fintEvent);
     }
 }
