@@ -33,13 +33,18 @@ namespace Fint.Sse.Adapter.Services
             }
             else
             {
-                if (_statusService.VerifyEvent(fintEvent).Status == Status.ADAPTER_ACCEPTED)
+                if (IsAccepted(fintEvent))
                 {
                     fintEvent.Status = Status.ADAPTER_RESPONSE;
                     _logger.LogInformation("POST EventResponse");
                     _httpService.Post(_appSettings.ResponseEndpoint, fintEvent);
                 }
             }
+        }
+
+        private bool IsAccepted(Event<object> fintEvent)
+        {
+            return _statusService.VerifyEvent(fintEvent).Status == Status.ADAPTER_ACCEPTED;
         }
 
         private void PostHealthCheckResponse(Event<object> fintEvent)
