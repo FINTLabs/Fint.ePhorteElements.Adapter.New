@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Fint.Event.Model;
 using Fint.Event.Model.Health;
 using Microsoft.Extensions.Logging;
@@ -34,6 +34,7 @@ namespace Fint.Sse.Adapter.Services
             else if (IsAccepted(fintEvent))
             {
                 fintEvent.Status = Status.ADAPTER_RESPONSE;
+                fintEvent.ResponseStatus = ResponseStatus.ACCEPTED;
                 _logger.LogInformation("POST EventResponse");
                 _httpService.Post(_appSettings.ResponseEndpoint, fintEvent);
             }
