@@ -5,10 +5,12 @@ namespace Fint.Sse.Adapter.Services
 {
     public class FintRequestHandler : IFintRequestHandler
     {
+        private readonly IEphorteElementsService _ePhorteElementsService;
         private readonly ILogger<EventHandlerService> _logger;
 
-        public FintRequestHandler(ILogger<EventHandlerService> logger)
+        public FintRequestHandler(IEphorteElementsService ePhorteElementsService, ILogger<EventHandlerService> logger)
         {
+            _ePhorteElementsService = ePhorteElementsService;
             _logger = logger;
         }
 
