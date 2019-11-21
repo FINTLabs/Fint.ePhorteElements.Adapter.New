@@ -31,14 +31,11 @@ namespace Fint.Sse.Adapter.Services
             {
                 PostHealthCheckResponse(fintEvent);
             }
-            else
+            else if (IsAccepted(fintEvent))
             {
-                if (IsAccepted(fintEvent))
-                {
-                    fintEvent.Status = Status.ADAPTER_RESPONSE;
-                    _logger.LogInformation("POST EventResponse");
-                    _httpService.Post(_appSettings.ResponseEndpoint, fintEvent);
-                }
+                fintEvent.Status = Status.ADAPTER_RESPONSE;
+                _logger.LogInformation("POST EventResponse");
+                _httpService.Post(_appSettings.ResponseEndpoint, fintEvent);
             }
         }
 
