@@ -1,6 +1,7 @@
 using System.IO;
 using System.Net.Http;
 using Fint.Sse.Adapter.Services;
+using Fint.Sse.Adapter.Services.NCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -45,6 +46,7 @@ namespace Fint.Sse.Adapter.Console
             serviceCollection.AddOptions();
             serviceCollection.Configure<AppSettings>(configuration.GetSection("Configuration"));
             serviceCollection.Configure<FintSseSettings>(configuration.GetSection("FintSseSettings"));
+            serviceCollection.Configure<NCoreOptions>(configuration.GetSection("NCore"));
 
             ConfigureJson();
             ConfigureLogging(configuration);
@@ -63,6 +65,7 @@ namespace Fint.Sse.Adapter.Console
             serviceCollection.AddTransient<IEventHandler, FintEventHandler>();
             serviceCollection.AddTransient<IFintRequestHandler, FintRequestHandler>();
             serviceCollection.AddSingleton<IFintEventListener, FintEventListener>();
+            serviceCollection.AddSingleton<NCoreFactory>();
 
             // add app
             serviceCollection.AddTransient<SseApplication>();
