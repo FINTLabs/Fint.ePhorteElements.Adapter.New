@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.Net.Http;
 using Fint.Sse.Adapter.Services;
 using Microsoft.Extensions.Configuration;
@@ -61,6 +61,7 @@ namespace Fint.Sse.Adapter.Console
             serviceCollection.AddTransient<IEventStatusService, EventStatusService>();
             serviceCollection.AddTransient<IEventHandlerService, EventHandlerService>();
             serviceCollection.AddTransient<IEventHandler, FintEventHandler>();
+            serviceCollection.AddTransient<IFintRequestHandler, FintRequestHandler>();
             serviceCollection.AddSingleton<IFintEventListener, FintEventListener>();
 
             // add app

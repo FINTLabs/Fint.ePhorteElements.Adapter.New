@@ -10,17 +10,20 @@ namespace Fint.Sse.Adapter.Services
     {
         private readonly IEventStatusService _statusService;
         private readonly IHttpService _httpService;
+        private readonly IFintRequestHandler _fintRequestHandler;
         private readonly ILogger<EventHandlerService> _logger;
         private readonly AppSettings _appSettings;
 
         public EventHandlerService(
             IEventStatusService statusService,
             IHttpService httpService,
+            IFintRequestHandler fintRequestHandler,
             IOptions<AppSettings> appSettings,
             ILogger<EventHandlerService> logger)
         {
             _statusService = statusService;
             _httpService = httpService;
+            _fintRequestHandler = fintRequestHandler;
             _logger = logger;
             _appSettings = appSettings.Value;
         }
@@ -33,6 +36,11 @@ namespace Fint.Sse.Adapter.Services
             }
             else if (IsAccepted(fintEvent))
             {
+                var fintRequest = new FintRequest(fintEvent.Action, fintEvent.Query);
+                var fintEventData = _fintRequestHandler.Execute(fintRequest);
+
+                fintEvent.Data = fintEventData;
+                
                 fintEvent.Status = Status.ADAPTER_RESPONSE;
                 fintEvent.ResponseStatus = ResponseStatus.ACCEPTED;
                 _logger.LogInformation("POST EventResponse");

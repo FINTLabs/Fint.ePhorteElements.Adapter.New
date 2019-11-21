@@ -19,6 +19,7 @@ namespace Fint.Sse.Adapter.Tests.Services
             _appSettingsMock = new Mock<IOptions<AppSettings>>();
             _httpServiceMock = new Mock<IHttpService>();
 
+            _requestHandlerMock = new Mock<IFintRequestHandler>();
             _loggerMock = new Mock<ILogger<EventHandlerService>>();
             _statusServiceMock = new Mock<IEventStatusService>();
 
@@ -50,6 +51,8 @@ namespace Fint.Sse.Adapter.Tests.Services
         {
             // Arrange
             _evtObj.Status = Status.ADAPTER_ACCEPTED;
+            _evtObj.Action = AdapterArchiveAction.GET_SAK.ToString();
+            _evtObj.Query = "sak/systemid/0000";
             _evtObj.Data = new List<object>();
 
             SetupStatusServiceMock();
@@ -71,6 +74,7 @@ namespace Fint.Sse.Adapter.Tests.Services
             _handlerService = new EventHandlerService(
                 _statusServiceMock.Object,
                 _httpServiceMock.Object,
+                _requestHandlerMock.Object,
                 _appSettingsMock.Object,
                 _loggerMock.Object
             );
@@ -79,6 +83,7 @@ namespace Fint.Sse.Adapter.Tests.Services
         private readonly Mock<IEventStatusService> _statusServiceMock;
         private readonly Mock<IOptions<AppSettings>> _appSettingsMock;
         private readonly Mock<IHttpService> _httpServiceMock;
+        private readonly Mock<IFintRequestHandler> _requestHandlerMock;
         private readonly Mock<ILogger<EventHandlerService>> _loggerMock;
         private EventHandlerService _handlerService;
         private readonly Event<object> _evtObj;
