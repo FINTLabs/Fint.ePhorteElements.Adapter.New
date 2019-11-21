@@ -65,6 +65,7 @@ namespace Fint.Sse.Adapter.Console
             serviceCollection.AddTransient<IEventHandler, FintEventHandler>();
             serviceCollection.AddTransient<IFintRequestHandler, FintRequestHandler>();
             serviceCollection.AddSingleton<IFintEventListener, FintEventListener>();
+            serviceCollection.AddTransient<IEphorteElementsService, EphorteElementsService>();
             serviceCollection.AddSingleton<NCoreFactory>();
 
             // add app
