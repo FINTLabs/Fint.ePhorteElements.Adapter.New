@@ -1,4 +1,5 @@
 using System;
+using Fint.Sse.Adapter.Mapping;
 using Microsoft.Extensions.Logging;
 
 namespace Fint.Sse.Adapter.Services
