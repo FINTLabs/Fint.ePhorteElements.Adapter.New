@@ -44,40 +44,40 @@ namespace Fint.Sse.Adapter.Services
                 // FINT cache update read actions
 
                 case AdapterArchiveAction.GET_ALL_SAKSSTATUS:
-                    return OnGetAllSaksstatusAction(request.Query);
+                    return OnGetAllSaksstatusAction();
 
                 case AdapterArchiveAction.GET_ALL_PARTROLLE:
-                    return OnGetAllPartRolleAction(request.Query);
+                    return OnGetAllPartRolleAction();
 
                 case AdapterArchiveAction.GET_ALL_DOKUMENTSTATUS:
-                    return OnGetAllDokumentstatusAction(request.Query);
+                    return OnGetAllDokumentstatusAction();
 
                 case AdapterArchiveAction.GET_ALL_DOKUMENTTYPE:
-                    return OnGetAllDokumenttypeAction(request.Query);
+                    return OnGetAllDokumenttypeAction();
 
                 case AdapterArchiveAction.GET_ALL_JOURNALSTATUS:
-                    return OnGetAllJournalStatusAction(request.Query);
+                    return OnGetAllJournalStatusAction();
 
                 case AdapterArchiveAction.GET_ALL_JOURNALPOSTTYPE:
-                    return OnGetAllJournalpostTypeAction(request.Query);
+                    return OnGetAllJournalpostTypeAction();
 
                 case AdapterArchiveAction.GET_ALL_KORRESPONDANSEPARTTYPE:
-                    return OnGetAllKorrespondansepartTypeAction(request.Query);
+                    return OnGetAllKorrespondansepartTypeAction();
 
                 case AdapterArchiveAction.GET_ALL_MERKNADSTYPE:
-                    return OnGetAllMerknadstypeAction(request.Query);
+                    return OnGetAllMerknadstypeAction();
 
                 case AdapterArchiveAction.GET_ALL_SKJERMINGSHJEMMEL:
-                    return OnGetAllSkjermingshjemmelAction(request.Query);
+                    return OnGetAllSkjermingshjemmelAction();
 
                 case AdapterArchiveAction.GET_ALL_TILGANGSRESTRIKSJON:
-                    return OnGetAllTilgangsrestriksjonAction(request.Query);
+                    return OnGetAllTilgangsrestriksjonAction();
 
                 case AdapterArchiveAction.GET_ALL_TILKNYTTETREGISTRERINGSOM:
-                    return OnGetAllTilknyttetRegistreringSomAction(request.Query);
+                    return OnGetAllTilknyttetRegistreringSomAction();
 
                 case AdapterArchiveAction.GET_ALL_VARIANTFORMAT:
-                    return OnGetAllVariantformatAction(request.Query);
+                    return OnGetAllVariantformatAction();
 
                 default:
                     var message = $"Unhandled action: {request.Action}";
@@ -134,84 +134,84 @@ namespace Fint.Sse.Adapter.Services
 
         // FINT cache update read actions
 
-        private FintEventData OnGetAllSaksstatusAction(FintQuery query)
+        private FintEventData OnGetAllSaksstatusAction()
         {
             // TODO: Implement
 
             return new FintEventData { };
         }
 
-        private FintEventData OnGetAllPartRolleAction(FintQuery query)
+        private FintEventData OnGetAllPartRolleAction()
         {
             // TODO: Implement
 
             return new FintEventData { };
         }
 
-        private FintEventData OnGetAllDokumentstatusAction(FintQuery query)
+        private FintEventData OnGetAllDokumentstatusAction()
         {
             // TODO: Implement
 
             return new FintEventData { };
         }
 
-        private FintEventData OnGetAllDokumenttypeAction(FintQuery query)
+        private FintEventData OnGetAllDokumenttypeAction()
         {
             // TODO: Implement
 
             return new FintEventData { };
         }
 
-        private FintEventData OnGetAllJournalStatusAction(FintQuery query)
+        private FintEventData OnGetAllJournalStatusAction()
         {
             // TODO: Implement
 
             return new FintEventData { };
         }
 
-        private FintEventData OnGetAllJournalpostTypeAction(FintQuery query)
+        private FintEventData OnGetAllJournalpostTypeAction()
         {
             // TODO: Implement
 
             return new FintEventData { };
         }
 
-        private FintEventData OnGetAllKorrespondansepartTypeAction(FintQuery query)
+        private FintEventData OnGetAllKorrespondansepartTypeAction()
         {
             // TODO: Implement
 
             return new FintEventData { };
         }
 
-        private FintEventData OnGetAllMerknadstypeAction(FintQuery query)
+        private FintEventData OnGetAllMerknadstypeAction()
         {
             // TODO: Implement
 
             return new FintEventData { };
         }
 
-        private FintEventData OnGetAllSkjermingshjemmelAction(FintQuery query)
+        private FintEventData OnGetAllSkjermingshjemmelAction()
         {
             // TODO: Implement
 
             return new FintEventData { };
         }
 
-        private FintEventData OnGetAllTilgangsrestriksjonAction(FintQuery query)
+        private FintEventData OnGetAllTilgangsrestriksjonAction()
         {
             // TODO: Implement
 
             return new FintEventData { };
         }
 
-        private FintEventData OnGetAllTilknyttetRegistreringSomAction(FintQuery query)
+        private FintEventData OnGetAllTilknyttetRegistreringSomAction()
         {
             // TODO: Implement
 
             return new FintEventData { };
         }
 
-        private FintEventData OnGetAllVariantformatAction(FintQuery query)
+        private FintEventData OnGetAllVariantformatAction()
         {
             // TODO: Implement
 
