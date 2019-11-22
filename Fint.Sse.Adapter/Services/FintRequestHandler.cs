@@ -136,9 +136,11 @@ namespace Fint.Sse.Adapter.Services
 
         private FintEventData OnGetAllSaksstatusAction()
         {
-            // TODO: Implement
+            var caseStatuses = _ePhorteElementsService.GetCaseStatuses();
 
-            return new FintEventData { };
+            var saksStatuses = EphorteElementsToFintMapper.MapCaseStatuses(caseStatuses);
+
+            return new FintEventData {saksStatuses};
         }
 
         private FintEventData OnGetAllPartRolleAction()
