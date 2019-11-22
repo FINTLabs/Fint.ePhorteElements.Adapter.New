@@ -7,7 +7,7 @@ namespace Fint.Sse.Adapter
         public AdapterArchiveAction Action { get; }
         public FintQuery Query { get; }
 
-        public FintRequest(string action, string query)
+        public FintRequest(string action, string query = null)
         {
             Action = (AdapterArchiveAction) Enum.Parse(typeof(AdapterArchiveAction), action, ignoreCase: true);
 
