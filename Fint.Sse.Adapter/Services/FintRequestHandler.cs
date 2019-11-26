@@ -90,9 +90,11 @@ namespace Fint.Sse.Adapter.Services
 
         private FintEventData OnGetSakAction(FintQuery query)
         {
-            // TODO: Implement
+            var @case = _ePhorteElementsService.GetCase(query);
 
-            return new FintEventData { };
+            var sak = EphorteElementsToFintMapper.MapCase(@case);
+
+            return new FintEventData {sak};
         }
 
         private FintEventData OnGetPartAction(FintQuery query)
