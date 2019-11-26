@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using FINT.Model.Administrasjon.Arkiv;
 using Fint.Sse.Adapter.Services;
 using Gecko.NCore.Client.ObjectModel.V3.En;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Xunit;
+using FluentAssertions;
 
 namespace Fint.Sse.Adapter.Tests.Services
 {
@@ -30,7 +31,7 @@ namespace Fint.Sse.Adapter.Tests.Services
 
             foreach (var item in data)
             {
-                Assert.IsType<Saksstatus>(item);
+                item.Should().BeOfType<Saksstatus>();
             }
         }
     }
