@@ -39,7 +39,8 @@ namespace Fint.Sse.Adapter.Services
                 var fintRequest = new FintRequest(fintEvent.Action, fintEvent.Query);
                 var fintEventData = _fintRequestHandler.Execute(fintRequest);
 
-                fintEvent.Data = fintEventData;
+                if (fintEventData != null)
+                    fintEvent.Data = fintEventData;
                 
                 fintEvent.Status = Status.ADAPTER_RESPONSE;
                 fintEvent.ResponseStatus = ResponseStatus.ACCEPTED;
