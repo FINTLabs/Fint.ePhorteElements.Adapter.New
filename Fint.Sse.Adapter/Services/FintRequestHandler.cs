@@ -92,6 +92,8 @@ namespace Fint.Sse.Adapter.Services
         {
             var @case = _ePhorteElementsService.GetCase(query);
 
+            if (@case == null) return null;
+
             var sak = EphorteElementsToFintMapper.MapCase(@case);
 
             return new FintEventData {sak};
@@ -139,6 +141,8 @@ namespace Fint.Sse.Adapter.Services
         private FintEventData OnGetAllSaksstatusAction()
         {
             var caseStatuses = _ePhorteElementsService.GetCaseStatuses();
+
+            if (caseStatuses == null) return null;
 
             var saksStatuses = EphorteElementsToFintMapper.MapCaseStatuses(caseStatuses);
 
