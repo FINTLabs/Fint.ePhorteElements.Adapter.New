@@ -6,6 +6,7 @@ namespace Fint.Sse.Adapter.Services
     public interface IEphorteElementsService
     {
         Case GetCase(FintQuery query);
+        CaseParty GetCaseParty(FintQuery query);
         IEnumerable<CaseStatus> GetCaseStatuses();
     }
 }

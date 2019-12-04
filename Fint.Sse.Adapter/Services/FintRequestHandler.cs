@@ -101,9 +101,13 @@ namespace Fint.Sse.Adapter.Services
 
         private FintEventData OnGetPartAction(FintQuery query)
         {
-            // TODO: Implement
+            var caseParty = _ePhorteElementsService.GetCaseParty(query);
 
-            return new FintEventData { };
+            if (caseParty == null) return null;
+
+            var part = EphorteElementsToFintMapper.MapCaseParty(caseParty);
+
+            return new FintEventData {part};
         }
 
         private FintEventData OnGetDokumentfilAction(FintQuery query)

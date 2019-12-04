@@ -19,6 +19,7 @@ namespace Fint.Sse.Adapter.Tests.Services
             var ephorteElementsServiceMock = new Mock<IEphorteElementsService>();
 
             ephorteElementsServiceMock.Setup(s => s.GetCase(It.IsAny<FintQuery>())).Returns(new Case());
+            ephorteElementsServiceMock.Setup(s => s.GetCaseParty(It.IsAny<FintQuery>())).Returns(new CaseParty());
             ephorteElementsServiceMock.Setup(s => s.GetCaseStatuses()).Returns(new List<CaseStatus> {new CaseStatus()});
 
             var loggerMock = new Mock<ILogger<FintRequestHandler>>();
@@ -32,6 +33,14 @@ namespace Fint.Sse.Adapter.Tests.Services
             var data = _requestHandler.Execute(new FintRequest("GET_SAK", "someIdType/someId"));
 
             data.First().Should().BeOfType<SakResource>();
+        }
+
+        [Fact]
+        public void GetPartActionResultShouldBeAnObjectOfTypePartResource()
+        {
+            var data = _requestHandler.Execute(new FintRequest("GET_PART", "someIdType/someId"));
+
+            data.First().Should().BeOfType<PartResource>();
         }
 
         [Fact]

@@ -30,6 +30,31 @@ namespace Fint.Sse.Adapter.Mapping
             return sak;
         }
 
+        public static PartResource MapCaseParty(CaseParty caseParty)
+        {
+            var part = new PartResource
+            {
+                PartId = new Identifikator {Identifikatorverdi = caseParty.Id.ToString()},
+                PartNavn = caseParty.Name,
+                Kontaktperson = caseParty.Attention,
+                Kontaktinformasjon = new Kontaktinformasjon
+                {
+                    Epostadresse = caseParty.Email,
+                    Telefonnummer = caseParty.Telephone,
+                },
+                Adresse = new AdresseResource
+                {
+                    Adresselinje = new List<string> {caseParty.PostalAddress},
+                    Postnummer = caseParty.PostalCode,
+                    Poststed = caseParty.City,
+                },
+            };
+
+            part.Links.Add("sak", new List<Link> {Link.with(typeof(Sak), "systemid", caseParty.CaseId.ToString())});
+
+            return part;
+        }
+
         public static IEnumerable<Saksstatus> MapCaseStatuses(IEnumerable<CaseStatus> caseStatuses)
         {
             var saksstatuses = new List<Saksstatus>();

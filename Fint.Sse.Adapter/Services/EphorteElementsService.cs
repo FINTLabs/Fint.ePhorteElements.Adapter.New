@@ -48,6 +48,13 @@ namespace Fint.Sse.Adapter.Services
             }
         }
 
+        public CaseParty GetCaseParty(FintQuery query)
+        {
+            var partId = Convert.ToInt32(query.Id);
+
+            return EphorteContext.Query<CaseParty>().ToList().FirstOrDefault(c => c.Id == partId);
+        }
+
         public IEnumerable<CaseStatus> GetCaseStatuses()
         {
             return EphorteContext.Query<CaseStatus>().ToList();
