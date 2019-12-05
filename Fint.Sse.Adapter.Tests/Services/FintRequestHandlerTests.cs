@@ -22,9 +22,11 @@ namespace Fint.Sse.Adapter.Tests.Services
             ephorteElementsServiceMock.Setup(s => s.GetCaseParty(It.IsAny<FintQuery>())).Returns(new CaseParty());
             ephorteElementsServiceMock.Setup(s => s.GetCaseStatuses()).Returns(new List<CaseStatus> {new CaseStatus()});
 
+            var fileRepositoryMock = new Mock<IFileRepository>();
+
             var loggerMock = new Mock<ILogger<FintRequestHandler>>();
 
-            _requestHandler = new FintRequestHandler(ephorteElementsServiceMock.Object, loggerMock.Object);
+            _requestHandler = new FintRequestHandler(ephorteElementsServiceMock.Object, fileRepositoryMock.Object, loggerMock.Object);
         }
 
         [Fact]
