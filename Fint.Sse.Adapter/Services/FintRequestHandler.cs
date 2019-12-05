@@ -1,6 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using FINT.Model.Administrasjon.Arkiv;
 using Fint.Sse.Adapter.Mapping;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace Fint.Sse.Adapter.Services
 {
@@ -38,7 +42,8 @@ namespace Fint.Sse.Adapter.Services
                 // User write actions
 
                 case AdapterArchiveAction.UPDATE_DOKUMENTFIL:
-                    return OnUpdateDokumentfilAction(request.Query);
+                    OnUpdateDokumentfilAction(request.Data);
+                    return null;
 
                 case AdapterArchiveAction.UPDATE_KORRESPONDANSEPART:
                     return OnUpdateKorrespondansepartAction(request.Query);
@@ -128,11 +133,11 @@ namespace Fint.Sse.Adapter.Services
 
         // User write actions
 
-        private FintEventData OnUpdateDokumentfilAction(FintQuery query)
+        private void OnUpdateDokumentfilAction(IEnumerable<object> data)
         {
-            // TODO: Implement
+            var dokumentfil = JsonConvert.DeserializeObject<Dokumentfil>(data.FirstOrDefault()?.ToString());
 
-            return new FintEventData { };
+            _fileRepository.PutFile(dokumentfil);
         }
 
         private FintEventData OnUpdateKorrespondansepartAction(FintQuery query)

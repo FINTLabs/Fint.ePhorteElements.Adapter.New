@@ -36,7 +36,7 @@ namespace Fint.Sse.Adapter.Services
             }
             else if (IsAccepted(fintEvent))
             {
-                var fintRequest = new FintRequest(fintEvent.Action, fintEvent.Query);
+                var fintRequest = new FintRequest(fintEvent.Action, fintEvent.Query, fintEvent.Data);
                 var fintEventData = _fintRequestHandler.Execute(fintRequest);
 
                 if (fintEventData != null)
