@@ -37,13 +37,24 @@ namespace Fint.Sse.Adapter.Services
             else if (IsAccepted(fintEvent))
             {
                 var fintRequest = new FintRequest(fintEvent.Action, fintEvent.Query, fintEvent.Data);
-                var fintEventData = _fintRequestHandler.Execute(fintRequest);
 
-                if (fintEventData != null)
-                    fintEvent.Data = fintEventData;
-                
+                try
+                {
+                    var fintEventData = _fintRequestHandler.Execute(fintRequest);
+
+                    if (fintEventData != null)
+                        fintEvent.Data = fintEventData;
+
+                    fintEvent.ResponseStatus = ResponseStatus.ACCEPTED;
+                }
+                catch (Exception exception)
+                {
+                    fintEvent.Message = exception.Message;
+                    
+                    fintEvent.ResponseStatus = ResponseStatus.ERROR;
+                }
+
                 fintEvent.Status = Status.ADAPTER_RESPONSE;
-                fintEvent.ResponseStatus = ResponseStatus.ACCEPTED;
                 _logger.LogInformation("POST EventResponse");
                 _httpService.Post(_appSettings.ResponseEndpoint, fintEvent);
             }
