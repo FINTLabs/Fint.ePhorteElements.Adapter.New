@@ -67,6 +67,11 @@ namespace Fint.Sse.Adapter.Services
 
         private string SaveFile(Dokumentfil dokumentfil)
         {
+            if (!Directory.Exists(_cacheDirectory))
+            {
+                throw new DirectoryNotFoundException("file-cache does not exist");
+            }
+
             var json = JsonConvert.SerializeObject(dokumentfil);
             var path = _cacheDirectory + dokumentfil.SystemId.Identifikatorverdi + ".json";
             File.WriteAllText(path, json);
