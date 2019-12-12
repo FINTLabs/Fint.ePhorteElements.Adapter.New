@@ -42,7 +42,7 @@ namespace Fint.Sse.Adapter.Tests.Services
             SetupHandlerService();
 
             // Act
-            _handlerService.HandleEvent(_evtObj);
+            _handlerService.HandleEvent(new SseEndpoint(), _evtObj);
             // Verify
             _httpServiceMock.Verify(x => x.Post(It.IsAny<string>(), It.IsAny<Event<object>>()), Times.Never());
         }
@@ -60,7 +60,7 @@ namespace Fint.Sse.Adapter.Tests.Services
             SetupHandlerService();
 
             // Act
-            _handlerService.HandleEvent(_evtObj);
+            _handlerService.HandleEvent(new SseEndpoint(), _evtObj);
             // Verify
             _httpServiceMock.Verify(x => x.Post(It.IsAny<string>(), It.IsAny<Event<object>>()), Times.Once());
         }

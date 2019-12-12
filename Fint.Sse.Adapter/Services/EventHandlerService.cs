@@ -28,7 +28,7 @@ namespace Fint.Sse.Adapter.Services
             _appSettings = appSettings.Value;
         }
 
-        public void HandleEvent(Event<object> fintEvent)
+        public void HandleEvent(SseEndpoint endpoint, Event<object> fintEvent)
         {
             if (fintEvent.IsHealthCheck())
             {
@@ -56,7 +56,7 @@ namespace Fint.Sse.Adapter.Services
 
                 fintEvent.Status = Status.ADAPTER_RESPONSE;
                 _logger.LogInformation("POST EventResponse");
-                _httpService.Post(_appSettings.ResponseEndpoint, fintEvent);
+                _httpService.Post(endpoint.ResponseUri, fintEvent);
             }
         }
 
