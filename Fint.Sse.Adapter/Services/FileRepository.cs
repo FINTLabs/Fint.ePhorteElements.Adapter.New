@@ -11,22 +11,20 @@ namespace Fint.Sse.Adapter.Services
         private readonly Dictionary<string, string> _fileMap = new Dictionary<string, string>();
         private readonly string _cacheDirectory = AppDomain.CurrentDomain.BaseDirectory + "file-cache/";
 
-        public void Start()
-        {
-        }
-
         public void Scan()
         {
             if (!Directory.Exists(_cacheDirectory))
-            {
                 throw new DirectoryNotFoundException("file-cache does not exist");
-            }
 
-            string[] files = Directory.GetFiles(_cacheDirectory);
+            var files = Directory.GetFiles(_cacheDirectory);
+            
             foreach (var file in files)
-            {
                 AddFile(file);
-            }
+        }
+
+        public void Start()
+        {
+            throw new NotImplementedException();
         }
 
         public void CleanUp()
@@ -34,54 +32,60 @@ namespace Fint.Sse.Adapter.Services
             _fileMap.Clear();
         }
 
-        private void AddFile(string path)
+        private void AddFile(string filePath)
         {
-            _fileMap.Add(GetId(path), path);
+            _fileMap.Add(GetId(filePath), filePath);
         }
 
-        private string GetId(string path)
+        private static string GetId(string filePath)
         {
-            return Path.GetFileNameWithoutExtension(path);
+            return Path.GetFileNameWithoutExtension(filePath);
         }
 
-        public Dokumentfil GetFile(string recNo)
+        public Dokumentfil GetFile(string fileId)
         {
-            return ReadFile(_fileMap[recNo]);
+            return ReadFile(_fileMap[fileId]);
         }
 
         public void PutFile(Dokumentfil dokumentfil)
         {
-            var path = SaveFile(dokumentfil);
-            _fileMap.Add(GetId(path), path);
+            var filePath = SaveFile(dokumentfil);
+            
+            _fileMap.Add(GetId(filePath), filePath);
         }
 
         public string GetContentType(string format)
         {
-            throw new System.NotImplementedException();
-        }
-
-        private Dokumentfil ReadFile(string path)
-        {
-            return JsonConvert.DeserializeObject<Dokumentfil>(File.ReadAllText(path));
-        }
-
-        private string SaveFile(Dokumentfil dokumentfil)
-        {
-            var json = JsonConvert.SerializeObject(dokumentfil);
-            var path = _cacheDirectory + dokumentfil.SystemId.Identifikatorverdi + ".json";
-            File.WriteAllText(path, json);
-
-            return path;
+            throw new NotImplementedException();
         }
 
         public void OnRemoval(string removal)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public string Load(string recNo)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
+        }
+
+        private static Dokumentfil ReadFile(string filePath)
+        {
+            return JsonConvert.DeserializeObject<Dokumentfil>(File.ReadAllText(filePath));
+        }
+
+        private string SaveFile(Dokumentfil dokumentfil)
+        {
+            if (!Directory.Exists(_cacheDirectory))
+                throw new DirectoryNotFoundException("file-cache does not exist");
+
+            var fileJson = JsonConvert.SerializeObject(dokumentfil);
+            
+            var filePath = _cacheDirectory + dokumentfil.SystemId.Identifikatorverdi + ".json";
+            
+            File.WriteAllText(filePath, fileJson);
+
+            return filePath;
         }
     }
 }
