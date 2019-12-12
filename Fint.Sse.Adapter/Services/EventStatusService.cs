@@ -20,7 +20,9 @@ namespace Fint.Sse.Adapter.Services
 
         public Event<object> VerifyEvent(Event<object> fintEvent)
         {
-            if (ActionUtils.IsValidStatusAction(fintEvent.Action) || ActionUtils.IsValidArchiveAction(fintEvent.Action))
+            if (ActionUtils.IsValidStatusAction(fintEvent.Action) 
+                || ActionUtils.IsValidArchiveAction(fintEvent.Action)
+                || ActionUtils.IsValidKulturminneAction(fintEvent.Action))
             {
                 fintEvent.Status = Status.ADAPTER_ACCEPTED;
             }

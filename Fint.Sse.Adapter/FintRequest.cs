@@ -6,13 +6,14 @@ namespace Fint.Sse.Adapter
 {
     public class FintRequest
     {
-        public ArkivActions Action { get; }
+        public string Action{ get; }
         public FintQuery Query { get; }
         public IEnumerable<object> Data { get; }
 
         public FintRequest(string action, string query = null, IEnumerable<object> data = null)
         {
-            Action = (ArkivActions) Enum.Parse(typeof(ArkivActions), action, ignoreCase: true);
+            //Action = (Enum) Enum.Parse(typeof(Enum), action, ignoreCase: true);
+            Action = action;
 
             if(query != null)
                 Query = new FintQuery(query);

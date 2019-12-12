@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using FINT.Model.Administrasjon.Arkiv;
+using FINT.Model.Kultur.Kulturminnevern;
 
 namespace Fint.Sse.Adapter
 {
     public class AdapterActions
     {
-        public static List<ArkivActions> GetArchiveActions { get; private set; }
 
-        public AdapterActions()
+        public static List<ArkivActions> ArchiveActions()
         {
-            GetArchiveActions = new List<ArkivActions>
+            return  new List<ArkivActions>
             {
                 ArkivActions.GET_ALL_DOKUMENTSTATUS,
                 ArkivActions.GET_ALL_DOKUMENTTYPE,
@@ -29,6 +29,15 @@ namespace Fint.Sse.Adapter
                 ArkivActions.GET_ALL_TILGANGSRESTRIKSJON,
                 ArkivActions.GET_ALL_TILKNYTTETREGISTRERINGSOM,
                 ArkivActions.GET_ALL_VARIANTFORMAT,
+            };
+        }
+        
+        public static List<KulturminnevernActions> KulturminneActions()
+        {
+            return  new List<KulturminnevernActions>
+            {
+                KulturminnevernActions.UPDATE_TILSKUDDFARTOY,
+                KulturminnevernActions.GET_TILSKUDDFARTOY
             };
         }
     }
