@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Fint.Event.Model;
+using FINT.Model.Administrasjon.Arkiv;
 using Fint.Sse.Adapter.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -51,7 +52,7 @@ namespace Fint.Sse.Adapter.Tests.Services
         {
             // Arrange
             _evtObj.Status = Status.ADAPTER_ACCEPTED;
-            _evtObj.Action = AdapterArchiveAction.GET_SAK.ToString();
+            _evtObj.Action = ArkivActions.GET_SAK.ToString();
             _evtObj.Query = "sak/systemid/0000";
             _evtObj.Data = new List<object>();
 

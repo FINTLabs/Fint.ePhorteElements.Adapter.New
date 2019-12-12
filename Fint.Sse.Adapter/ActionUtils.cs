@@ -1,5 +1,6 @@
 ﻿using System;
 using Fint.Event.Model;
+using FINT.Model.Administrasjon.Arkiv;
 
 namespace Fint.Sse.Adapter
 {
@@ -7,8 +8,8 @@ namespace Fint.Sse.Adapter
     {
         public static bool IsValidArchiveAction(string eventAction)
         {
-            return Enum.TryParse(eventAction, true, out AdapterArchiveAction action) &&
-                   Enum.IsDefined(typeof(AdapterArchiveAction), action);
+            return Enum.TryParse(eventAction, true, out ArkivActions action) &&
+                   AdapterActions.GetArchiveActions.Contains(action);
         }
 
         public static bool IsValidStatusAction(string eventAction)

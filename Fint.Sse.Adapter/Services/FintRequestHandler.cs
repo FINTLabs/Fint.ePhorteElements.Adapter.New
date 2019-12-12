@@ -27,63 +27,63 @@ namespace Fint.Sse.Adapter.Services
             {
                 // User read actions
 
-                case AdapterArchiveAction.GET_SAK:
+                case ArkivActions.GET_SAK:
                     return OnGetSakAction(request.Query);
 
-                case AdapterArchiveAction.GET_PART:
+                case ArkivActions.GET_PART:
                     return OnGetPartAction(request.Query);
 
-                case AdapterArchiveAction.GET_DOKUMENTFIL:
+                case ArkivActions.GET_DOKUMENTFIL:
                     return OnGetDokumentfilAction(request.Query);
 
-                case AdapterArchiveAction.GET_KORRESPONDANSEPART:
+                case ArkivActions.GET_KORRESPONDANSEPART:
                     return OnGetKorrespondansepartAction(request.Query);
 
                 // User write actions
 
-                case AdapterArchiveAction.UPDATE_DOKUMENTFIL:
+                case ArkivActions.UPDATE_DOKUMENTFIL:
                     OnUpdateDokumentfilAction(request.Data);
                     return null;
 
-                case AdapterArchiveAction.UPDATE_KORRESPONDANSEPART:
+                case ArkivActions.UPDATE_KORRESPONDANSEPART:
                     return OnUpdateKorrespondansepartAction(request.Query);
 
                 // FINT cache update read actions
 
-                case AdapterArchiveAction.GET_ALL_SAKSSTATUS:
+                case ArkivActions.GET_ALL_SAKSSTATUS:
                     return OnGetAllSaksstatusAction();
 
-                case AdapterArchiveAction.GET_ALL_PARTROLLE:
+                case ArkivActions.GET_ALL_PARTROLLE:
                     return OnGetAllPartRolleAction();
 
-                case AdapterArchiveAction.GET_ALL_DOKUMENTSTATUS:
+                case ArkivActions.GET_ALL_DOKUMENTSTATUS:
                     return OnGetAllDokumentstatusAction();
 
-                case AdapterArchiveAction.GET_ALL_DOKUMENTTYPE:
+                case ArkivActions.GET_ALL_DOKUMENTTYPE:
                     return OnGetAllDokumenttypeAction();
 
-                case AdapterArchiveAction.GET_ALL_JOURNALSTATUS:
+                case ArkivActions.GET_ALL_JOURNALSTATUS:
                     return OnGetAllJournalStatusAction();
 
-                case AdapterArchiveAction.GET_ALL_JOURNALPOSTTYPE:
+                case ArkivActions.GET_ALL_JOURNALPOSTTYPE:
                     return OnGetAllJournalpostTypeAction();
 
-                case AdapterArchiveAction.GET_ALL_KORRESPONDANSEPARTTYPE:
+                case ArkivActions.GET_ALL_KORRESPONDANSEPARTTYPE:
                     return OnGetAllKorrespondansepartTypeAction();
 
-                case AdapterArchiveAction.GET_ALL_MERKNADSTYPE:
+                case ArkivActions.GET_ALL_MERKNADSTYPE:
                     return OnGetAllMerknadstypeAction();
 
-                case AdapterArchiveAction.GET_ALL_SKJERMINGSHJEMMEL:
+                case ArkivActions.GET_ALL_SKJERMINGSHJEMMEL:
                     return OnGetAllSkjermingshjemmelAction();
 
-                case AdapterArchiveAction.GET_ALL_TILGANGSRESTRIKSJON:
+                case ArkivActions.GET_ALL_TILGANGSRESTRIKSJON:
                     return OnGetAllTilgangsrestriksjonAction();
 
-                case AdapterArchiveAction.GET_ALL_TILKNYTTETREGISTRERINGSOM:
+                case ArkivActions.GET_ALL_TILKNYTTETREGISTRERINGSOM:
                     return OnGetAllTilknyttetRegistreringSomAction();
 
-                case AdapterArchiveAction.GET_ALL_VARIANTFORMAT:
+                case ArkivActions.GET_ALL_VARIANTFORMAT:
                     return OnGetAllVariantformatAction();
 
                 default:
