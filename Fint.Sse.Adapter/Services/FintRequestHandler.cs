@@ -25,80 +25,71 @@ namespace Fint.Sse.Adapter.Services
 
         public FintEventData Execute(FintRequest request)
         {
-            if (Enum.TryParse(request.Action, out KulturminnevernActions kulturminnevernActions))
+            switch (request.Action)
             {
-                switch (kulturminnevernActions)
-                {
-                    case KulturminnevernActions.UPDATE_TILSKUDDFARTOY:
-                        return OnUpdateTilskuddFartoy(request.Data);
-                    
-                }
-            }
+                // User read actions
 
-            if (Enum.TryParse(request.Action, out ArkivActions arkivActions))
-            {
-                switch (arkivActions)
-                {
-                    case ArkivActions.GET_SAK:
-                        return OnGetSakAction(request.Query);
+                case ArkivActions.GET_SAK:
+                    return OnGetSakAction(request.Query);
 
-                    case ArkivActions.GET_PART:
-                        return OnGetPartAction(request.Query);
+                case ArkivActions.GET_PART:
+                    return OnGetPartAction(request.Query);
 
-                    case ArkivActions.GET_DOKUMENTFIL:
-                        return OnGetDokumentfilAction(request.Query);
+                case ArkivActions.GET_DOKUMENTFIL:
+                    return OnGetDokumentfilAction(request.Query);
 
-                    case ArkivActions.GET_KORRESPONDANSEPART:
-                        return OnGetKorrespondansepartAction(request.Query);
+                case ArkivActions.GET_KORRESPONDANSEPART:
+                    return OnGetKorrespondansepartAction(request.Query);
 
-                    // User write actions
+                // User write actions
 
-                    case ArkivActions.UPDATE_DOKUMENTFIL:
-                        OnUpdateDokumentfilAction(request.Data);
-                        return null;
+                case ArkivActions.UPDATE_DOKUMENTFIL:
+                    OnUpdateDokumentfilAction(request.Data);
+                    return null;
 
-                    case ArkivActions.UPDATE_KORRESPONDANSEPART:
-                        return OnUpdateKorrespondansepartAction(request.Query);
+                case ArkivActions.UPDATE_KORRESPONDANSEPART:
+                    return OnUpdateKorrespondansepartAction(request.Query);
 
-                    // FINT cache update read actions
+                case KulturminnevernActions.UPDATE_TILSKUDDFARTOY:
+                    return OnUpdateTilskuddFartoy(request.Data);
 
-                    case ArkivActions.GET_ALL_SAKSSTATUS:
-                        return OnGetAllSaksstatusAction();
+                // FINT cache update read actions
 
-                    case ArkivActions.GET_ALL_PARTROLLE:
-                        return OnGetAllPartRolleAction();
+                case ArkivActions.GET_ALL_SAKSSTATUS:
+                    return OnGetAllSaksstatusAction();
 
-                    case ArkivActions.GET_ALL_DOKUMENTSTATUS:
-                        return OnGetAllDokumentstatusAction();
+                case ArkivActions.GET_ALL_PARTROLLE:
+                    return OnGetAllPartRolleAction();
 
-                    case ArkivActions.GET_ALL_DOKUMENTTYPE:
-                        return OnGetAllDokumenttypeAction();
+                case ArkivActions.GET_ALL_DOKUMENTSTATUS:
+                    return OnGetAllDokumentstatusAction();
 
-                    case ArkivActions.GET_ALL_JOURNALSTATUS:
-                        return OnGetAllJournalStatusAction();
+                case ArkivActions.GET_ALL_DOKUMENTTYPE:
+                    return OnGetAllDokumenttypeAction();
 
-                    case ArkivActions.GET_ALL_JOURNALPOSTTYPE:
-                        return OnGetAllJournalpostTypeAction();
+                case ArkivActions.GET_ALL_JOURNALSTATUS:
+                    return OnGetAllJournalStatusAction();
 
-                    case ArkivActions.GET_ALL_KORRESPONDANSEPARTTYPE:
-                        return OnGetAllKorrespondansepartTypeAction();
+                case ArkivActions.GET_ALL_JOURNALPOSTTYPE:
+                    return OnGetAllJournalpostTypeAction();
 
-                    case ArkivActions.GET_ALL_MERKNADSTYPE:
-                        return OnGetAllMerknadstypeAction();
+                case ArkivActions.GET_ALL_KORRESPONDANSEPARTTYPE:
+                    return OnGetAllKorrespondansepartTypeAction();
 
-                    case ArkivActions.GET_ALL_SKJERMINGSHJEMMEL:
-                        return OnGetAllSkjermingshjemmelAction();
+                case ArkivActions.GET_ALL_MERKNADSTYPE:
+                    return OnGetAllMerknadstypeAction();
 
-                    case ArkivActions.GET_ALL_TILGANGSRESTRIKSJON:
-                        return OnGetAllTilgangsrestriksjonAction();
+                case ArkivActions.GET_ALL_SKJERMINGSHJEMMEL:
+                    return OnGetAllSkjermingshjemmelAction();
 
-                    case ArkivActions.GET_ALL_TILKNYTTETREGISTRERINGSOM:
-                        return OnGetAllTilknyttetRegistreringSomAction();
+                case ArkivActions.GET_ALL_TILGANGSRESTRIKSJON:
+                    return OnGetAllTilgangsrestriksjonAction();
 
-                    case ArkivActions.GET_ALL_VARIANTFORMAT:
-                        return OnGetAllVariantformatAction();
-                    
-                }
+                case ArkivActions.GET_ALL_TILKNYTTETREGISTRERINGSOM:
+                    return OnGetAllTilknyttetRegistreringSomAction();
+
+                case ArkivActions.GET_ALL_VARIANTFORMAT:
+                    return OnGetAllVariantformatAction();
             }
             var message = $"Unhandled action: {request.Action}";
             _logger.LogError(message);
