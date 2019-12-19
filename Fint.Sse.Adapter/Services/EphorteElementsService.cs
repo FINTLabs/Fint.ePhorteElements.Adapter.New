@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
+using FINT.Model.Kultur.Kulturminnevern;
 using Fint.Sse.Adapter.Services.NCore;
 using Gecko.NCore.Client;
 using Gecko.NCore.Client.ObjectModel.V3.En;
@@ -58,6 +59,16 @@ namespace Fint.Sse.Adapter.Services
         public IEnumerable<CaseStatus> GetCaseStatuses()
         {
             return EphorteContext.Query<CaseStatus>().ToList();
+        }
+
+        public void UpdateTilskuddFartoyCase(Case tilskuddFartoy)
+        {
+            //EphorteContext.Add(); // Case
+            //EphorteContext.Add(); // Subobjects ...
+            //EphorteContext.Add();
+            //EphorteContext.Add();
+            //EphorteContext.Add();
+            //EphorteContext.Add();
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using FINT.Model.Administrasjon.Arkiv;
 using FINT.Model.Kultur.Kulturminnevern;
 using Fint.Sse.Adapter.Mapping;
+using Gecko.NCore.Client.ObjectModel.V3.En;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
@@ -51,7 +52,8 @@ namespace Fint.Sse.Adapter.Services
                     return OnUpdateKorrespondansepartAction(request.Query);
 
                 case KulturminnevernActions.UPDATE_TILSKUDDFARTOY:
-                    return OnUpdateTilskuddFartoy(request.Data);
+                    OnUpdateTilskuddFartoyAction(request.Query, request.Data);
+                    return null;
 
                 // FINT cache update read actions
 
@@ -94,11 +96,6 @@ namespace Fint.Sse.Adapter.Services
             var message = $"Unhandled action: {request.Action}";
             _logger.LogError(message);
             throw new Exception(message);
-        }
-
-        private FintEventData OnUpdateTilskuddFartoy(IEnumerable<object> requestData)
-        {
-            throw new NotImplementedException();
         }
 
         // User read actions
@@ -153,6 +150,30 @@ namespace Fint.Sse.Adapter.Services
             // TODO: Implement
 
             return new FintEventData { };
+        }
+
+        private void OnUpdateTilskuddFartoyAction(FintQuery query, IEnumerable<object> data)
+        {
+            if (query.IdType != "mappeid")
+                throw new ArgumentException("Excpected id of type mappeid, found " + query.IdType);
+
+            var tilskuddFartoyJson = data.FirstOrDefault()?.ToString();
+
+            var tilskuddFartoy = JsonConvert.DeserializeObject<TilskuddFartoyResource>(tilskuddFartoyJson);
+
+            if (!tilskuddFartoy.Journalpost.Any())
+                throw new ArgumentException("Update must contain at least one Journalpost");
+
+            var tilskuddFartoyCase = _ePhorteElementsService.GetCase(query);
+
+            foreach (var journalpost in tilskuddFartoy.Journalpost)
+            {
+                var registryEntry = FintToEphorteElementsMapper.MapJournalPost(journalpost);
+
+                tilskuddFartoyCase.RegistryEntries.Add(registryEntry);
+            }
+
+            _ePhorteElementsService.UpdateTilskuddFartoyCase(tilskuddFartoyCase);
         }
 
         // FINT cache update read actions
